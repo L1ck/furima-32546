@@ -2,12 +2,12 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :nickname
 
-    with_options format: {with: /\A[ぁ-んァ-ン一-龥]/} do
+    with_options format: { with: /\A[ぁ-んァ-ン一-龥]/ } do
       validates :name_second
       validates :name_first
     end
 
-    with_options format: {with: /\A[ァ-ヶー－]+\z/} do
+    with_options format: { with: /\A[ァ-ヶー－]+\z/ } do
       validates :kana_second
       validates :kana_first
     end
