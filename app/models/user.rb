@@ -11,7 +11,7 @@ class User < ApplicationRecord
       validates :kana_second
       validates :kana_first
     end
-    
+
     with_options format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,100}+\z/i } do
       validates :password
     end
