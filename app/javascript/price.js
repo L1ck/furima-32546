@@ -1,4 +1,4 @@
-unction price() {
+function price() {
   const market_price = document.getElementById("item-price");
   const add_tax = document.getElementById("add-tax-price");
   const profit = document.getElementById("profit");
