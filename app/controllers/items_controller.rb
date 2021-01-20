@@ -46,6 +46,6 @@ class ItemsController < ApplicationController
   end
 
   def prohibit_access
-    redirect_to action: :show if @item.user_id != current_user.id
+    redirect_to action: :index if @item.user_id != current_user.id
   end
 end
