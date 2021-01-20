@@ -15,10 +15,10 @@
 
 ### Association
 
-* has_many :products
-* has_many :buyers
+* has_many :items
+* has_many :orders
 
-## products テーブル
+## items テーブル
 
 | Column             | Type                | Options                 |
 |--------------------|---------------------|-------------------------|
@@ -35,19 +35,19 @@
 ### Association
 
 * belongs_to :user
-* has_one    :buyer
+* has_one    :order
 
-## buyers テーブル
+## orders テーブル
 
 | Column             | Type                | Options                 |
 |--------------------|---------------------|-------------------------|
 | user               | references          | foreign_key: true       |
-| product            | references          | foreign_key: true       |
+| item               | references          | foreign_key: true       |
 
 ### Association
 
 * belongs_to :user
-* belongs_to :product
+* belongs_to :item
 * has_one    :address
 
 ## addresses テーブル
@@ -60,8 +60,8 @@
 | district           | string              | null: false             |
 | building           | string              |                         |
 | phone_number       | string              | null: false             |
-| buyer              | references          | foregn_key: true        |
+| order              | references          | foregn_key: true        |
 
 ### Association
 
-* belongs_to :buyer
+* belongs_to :order
