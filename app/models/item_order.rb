@@ -4,18 +4,18 @@ class ItemOrder
 
   with_options presence: true do
     validates :token, :city, :district
-    validates :area_id, numericality: { other_than: 1 }
-    # validates :zip_code, format: { with: /\A\d{3}[-]\d{4}\z/ }
-    validates :phone_number, format: { with: /\A\d{11}\z/ }
-
-    with_options format: { with: /\A\d{3}-\d{4}\z/ } do
-      validates :zipcode, length: { is: 8 }
-    end
+    validates :user_id
+    validates :item_id
+    validates :zipcode, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
+    validates :area_id, numericality: { other_than: 1 , message: "Select"}
+    validates :phone_number, numericality: { other_than: 0 , message: "can't be blank" }
+    validates :phone_number, format: {with: /\A[-]?[0-9]+(\.[0-9]+)?\z/, message: "is half-width numerical value"}
+    validates :phone_number, format: {with: /(0{1}\d{10})/, message: "at least 11 digit"}
   end
 
   def save
     Address.create(zipcode: zipcode, area_id: area_id, city: city, district: district, building: building,
-                   phone_number: phone_number)
+                   phone_number: phone_number, order_id: order_id)
     Order.create(user_id: user_id, item_id: item_id)
   end
 end
