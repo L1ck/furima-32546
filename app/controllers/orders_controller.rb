@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   def index
     # @item_stock = ItemOrder.find(params[:item_id])
-    if user_signed_in? && current_user.id != @item.user_id && @item.order.nil?
+    if user_signed_in? && current_user.id != @item.user_id && @item.order == nil
       @item_order = ItemOrder.new
     else
       redirect_to root_path
@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
     if @item_order.valid?
       pay_item
       @item_order.save
-      redirect_to root_path
+      return redirect_to root_path
     else
       render action: :index
     end
