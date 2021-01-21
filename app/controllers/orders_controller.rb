@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
     if Order.exists?(item_id: params[:item_id])
       redirect_to root_path
     else
-      @user_order = UserOrder.new
+      @item_order = ItemOrder.new
     end
   end
 

@@ -3,10 +3,16 @@ require 'rails_helper'
 RSpec.describe ItemOrder, type: :model do
   describe '購入者情報の保存' do
     before do
-      @item_order = FactoryBot.build(:item_order)
+      buyer = FactoryBot.create(:user)
+      item = FactoryBot.create(:item)
+      @item_order = FactoryBot.build(:item_order, user_id: buyer.id, item_id: item.id)
     end
 
     it '全ての項目が入力されていれば購入ができる' do
+      expect(@item_order).to be_valid
+    end
+    it 'buildingがなくても登録できる' do
+      @item_order.building = nil
       expect(@item_order).to be_valid
     end
     it 'user_idが無いと保存ができないこと' do
@@ -42,7 +48,7 @@ RSpec.describe ItemOrder, type: :model do
     it 'areaを選択していないと購入できない' do
       @item_order.area_id = 0
       @item_order.valid?
-      expect(@item_order.errors.full_messages).to include("Area Select")
+      expect(@item_order.errors.full_messages).to include()
     end
     it 'cityが空だと購入できない' do
       @item_order.city = ''

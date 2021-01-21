@@ -15,7 +15,7 @@ class ItemOrder
 
   def save
     Address.create(zipcode: zipcode, area_id: area_id, city: city, district: district, building: building,
-                   phone_number: phone_number, order_id: order_id)
-    Order.create(user_id: user_id, item_id: item_id)
+                   phone_number: phone_number)
+    order = Order.create!(user_id: @user_id,item_id: item_id)
   end
 end
