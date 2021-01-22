@@ -4,7 +4,11 @@ class OrdersController < ApplicationController
   before_action :move_to_index
 
   def index
-    @item_order = ItemOrder.new
+    if user_signed_in? && current_user.id != @item.user_id && @item.order == nil
+      @item_order = ItemOrder.new
+    else
+      redirect_to root_path
+    end
   end
 
   def create
@@ -39,10 +43,6 @@ class OrdersController < ApplicationController
     )
   end
   def move_to_index
-    if user_signed_in?
-      redirect_to root_path if current_user.id == @item.user.id
-    else
-      redirect_to new_user_session_path
-    end
+    redirect_to root_path unless @item.user_id != current_user.id
   end
 end
